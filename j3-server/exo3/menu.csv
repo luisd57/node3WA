@@ -1,0 +1,10 @@
+id,nom,description,prix,categorie
+1,Salade César - Nouveau,"Salade romaine, tomates cerises, croûtons, parmesan et poulet grillé",12,entree
+2,Tartare de saumon,"Saumon frais coupé en petits dés, vinaigrette d'huile d'olive, citron et fines herbes",18,entree
+3,Côte de boeuf,"Côte de boeuf de race française, grillée et servie avec des frites maison",28,plat
+4,Poulet basquaise,Filets de poulet cuits dans une sauce tomate épicée avec poivrons et oignons,16,plat
+5,Crème brûlée,"Crème vanille cuite lentement, caramélisée au sucre",8,dessert
+6,Tarte Tatin,"Tarte aux pommes caramélisées, servie avec une boule de glace vanille",7,dessert
+7,Sangria,"Vin rouge, fruits frais et épices, servi bien frais",6,boisson
+8,Mojito,"Rhum, menthe fraîche, citron vert et soda, servi sur glace",8,boisson
+9,Café glacé,"Café refroidi mélangé avec des glaçons et du lait, servi avec de la crème fouettée",5,boisson
