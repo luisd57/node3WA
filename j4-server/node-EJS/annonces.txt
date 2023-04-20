@@ -1,0 +1,11 @@
+Annonce 1
+Ceci est la description de l'annonce 1.
+Prix : 100€
+
+Annonce 2
+Ceci est la description de l'annonce 2.
+Prix : 200€
+
+Annonce 3
+Ceci est la description de l'annonce 3.
+Prix : 50€

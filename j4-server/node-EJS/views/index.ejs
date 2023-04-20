@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Accueil</title>
+</head>
+
+<body>
+    <h1>Bienvenue sur notre site</h1>
+    <p>Voici la liste des annonces :</p>
+    <ul>
+        <% annonces.forEach((annonce)=> { %>
+            <li>
+                <h2>
+                    <%= annonce.titre %>
+                </h2>
+                <p>
+                    <%= annonce.description %>
+                </p>
+                <p>Prix : <%= annonce.prix %>€</p>
+            </li>
+            <% }) %>
+    </ul>
+
+    <nav>
+        <button onclick="window.location.href='/about'">À propos</button>
+        <button onclick="window.location.href='/contact'">Contact</button>
+    </nav>
+</body>
+
+</html>
