@@ -13,7 +13,7 @@
     <header class="fixed top-0 left-0 w-full flex justify-between px-4 py-2 bg-gray-200">
         <h1 class="text-xl font-semibold">Student Management</h1>
         <nav class="flex items-center mx-auto">
-            <a href="/home" class="text-gray-800 mx-2 hover:underline">Home</a>
+            <a href="/" class="text-gray-800 mx-2 hover:underline">Home</a>
         </nav>
     </header>
     <div class="container mx-auto mt-16 px-4 ">
@@ -24,14 +24,14 @@
             <label for="birth" class="block mb-1">Birth:</label>
             <input type="date" id="birth" name="birth" required class="border border-gray-300 rounded px-2 py-1 w-1/4">
             <br>
-            <input type="submit" value="Add" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">
+            <input type="submit" value="Add" class="bg-lime-500 text-white px-4 py-2 rounded hover:bg-lime-700">
         </form>
         <h2 class="text-2xl mt-8 mb-4">Students</h2>
         <ul>
             <% students.forEach(student=> { %>
                 <li class="flex justify-between items-center border-b border-gray-300 py-2">
                     <%= student.name %>
-                        <%= dayjs(student.birth).format('DD/MM/YYYY') %>
+                        <%= dayjs(student.birth).format('dddd D, MMMM YYYY') %>
                             <button data-name="<%= student.name %>"
                                 class="removeBtn bg-red-500 text-white px-2 py-1 rounded hover:bg-red-700">X</button>
                 </li>
@@ -67,23 +67,21 @@
             });
         });
 
-        const removeButtons = document.querySelectorAll('.removeBtn');
-        removeButtons.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const name = e.target.getAttribute('data-name');
-                fetch('/removeStudent', {
+        const removeButtons = document.querySelectorAll('.removeBtn').forEach(button => {
+            button.addEventListener('click', async () => {
+                const name = button.getAttribute('data-name');
+                const response = await fetch('/removeStudent', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ name })
-                }).then(response => {
-                    if (response.ok) {
-                        window.location.reload();
-                    }
                 });
+                if (response.ok) {
+                    location.reload();
+                }
             });
         });
+
+
     </script>
 </body>
 

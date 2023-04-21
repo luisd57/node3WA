@@ -3,6 +3,7 @@ const fs = require('fs');
 const ejs = require('ejs');
 const path = require('path');
 const dayjs = require('dayjs');
+const locale = require('./locale/fr')
 const url = require('url');
 const { addStudent, removeStudent } = require('./utils');
 const students = require('./Data/students');
@@ -11,6 +12,7 @@ require('dotenv').config();
 const server = http.createServer((req, res) => {
     const parsedUrl = url.parse(req.url, true);
     const pathname = parsedUrl.pathname;
+    const formattedDate = dayjs().locale(locale.name).format(locale.formats.LL)
 
     if (pathname === '/' || pathname === '/home') {
         fs.readFile(path.join(__dirname, 'view', 'home.ejs'), 'utf-8', (err, content) => {
@@ -30,7 +32,7 @@ const server = http.createServer((req, res) => {
                 res.end('Internal Server Error');
                 return;
             }
-            const renderedContent = ejs.render(content, { students, dayjs });
+            const renderedContent = ejs.render(content, { students, dayjs, formattedDate });
             res.writeHead(200, { 'Content-Type': 'text/html' });
             res.end(renderedContent);
         });
@@ -72,8 +74,8 @@ const server = http.createServer((req, res) => {
     }
 });
 
-const port = process.env.APP_PORT || 3000;
-const host = process.env.APP_LOCALHOST || 'localhost';
+const port = process.env.APP_PORT;
+const host = process.env.APP_LOCALHOST;
 server.listen(port, host, () => {
     console.log(`Server running at http://${host}:${port}`);
 });
