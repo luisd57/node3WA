@@ -4,14 +4,13 @@ const ejs = require('ejs');
 const path = require('path');
 const dayjs = require('dayjs');
 const url = require('url');
-const { addStudent, removeStudent, getStudents } = require('./utils');
+const { addStudent, removeStudent } = require('./utils');
 const students = require('./Data/students');
 require('dotenv').config();
 
 const server = http.createServer((req, res) => {
     const parsedUrl = url.parse(req.url, true);
     const pathname = parsedUrl.pathname;
-    const query = parsedUrl.query;
 
     if (pathname === '/' || pathname === '/home') {
         fs.readFile(path.join(__dirname, 'view', 'home.ejs'), 'utf-8', (err, content) => {

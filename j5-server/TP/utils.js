@@ -9,8 +9,4 @@ const removeStudent = (students, name) => {
     }
 };
 
-const getStudents = (students) => {
-    return students;
-};
-
-module.exports = { addStudent, removeStudent, getStudents };
+module.exports = { addStudent, removeStudent };
