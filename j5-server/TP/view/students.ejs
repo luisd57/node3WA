@@ -40,7 +40,7 @@
     </div>
     <script>
         document.getElementById('addStudentForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
+
             const name = document.getElementById('name').value;
             const birth = document.getElementById('birth').value;
             const response = await fetch('/addStudent', {
@@ -51,20 +51,6 @@
             if (response.ok) {
                 location.reload();
             }
-        });
-
-        document.querySelectorAll('.removeStudent').forEach(button => {
-            button.addEventListener('click', async () => {
-                const name = button.getAttribute('data-name');
-                const response = await fetch('/removeStudent', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name })
-                });
-                if (response.ok) {
-                    location.reload();
-                }
-            });
         });
 
         const removeButtons = document.querySelectorAll('.removeBtn').forEach(button => {

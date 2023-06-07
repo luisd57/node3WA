@@ -3,16 +3,16 @@ const fs = require('fs');
 const ejs = require('ejs');
 const path = require('path');
 const dayjs = require('dayjs');
-const locale = require('./locale/fr')
 const url = require('url');
 const { addStudent, removeStudent } = require('./utils');
 const students = require('./Data/students');
+// const locale = require('./locale/fr')
 require('dotenv').config();
 
 const server = http.createServer((req, res) => {
     const parsedUrl = url.parse(req.url, true);
     const pathname = parsedUrl.pathname;
-    const formattedDate = dayjs().locale(locale.name).format(locale.formats.LL)
+    //const formattedDate = dayjs().locale(locale.name).format(locale.formats.LL)
 
     if (pathname === '/' || pathname === '/home') {
         fs.readFile(path.join(__dirname, 'view', 'home.ejs'), 'utf-8', (err, content) => {
@@ -32,7 +32,7 @@ const server = http.createServer((req, res) => {
                 res.end('Internal Server Error');
                 return;
             }
-            const renderedContent = ejs.render(content, { students, dayjs, formattedDate });
+            const renderedContent = ejs.render(content, { students, dayjs, /*formattedDate*/ });
             res.writeHead(200, { 'Content-Type': 'text/html' });
             res.end(renderedContent);
         });
