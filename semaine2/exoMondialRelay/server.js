@@ -1,39 +1,46 @@
 const express = require('express');
 const soap = require('soap');
-const xml2js = require('xml2js');
 const md5 = require('md5');
+const Joi = require('joi');
 
 const app = express();
 app.use(express.json());
 
 const url = 'http://api.mondialrelay.com/Web_Services.asmx?wsdl';
 
-app.post('/relaysearch', (req, res) => {
+const relaySearchSchema = Joi.object({
+    enseigne: Joi.string().required(),
+    pays: Joi.string().required(),
+    ville: Joi.string().required(),
+    cp: Joi.string().required(),
+});
+
+app.post('/relaysearch', async (req, res) => {
+    const { error } = relaySearchSchema.validate(req.body);
+    if (error) {
+        res.status(400).send(error.details[0].message);
+        return;
+    }
+
+    const { enseigne, pays, ville, cp } = req.body;
+    const unhashedString = enseigne + pays + ville + cp + "PrivateK";
+    const Security = md5(unhashedString).toUpperCase();
+
     const args = {
-        Enseigne: req.body.enseigne,
-        Pays: req.body.pays,
-        Ville: req.body.ville,
-        CP: req.body.cp,
+        Enseigne: enseigne,
+        Pays: pays,
+        Ville: ville,
+        CP: cp,
+        Security
     };
 
-    const unhashedString =
-        args.Enseigne +
-        args.Pays +
-        args.Ville +
-        args.CP +
-        "PrivateK";
-
-    const Security = md5(unhashedString).toUpperCase();
-    args.Security = Security;
-
-    soap.createClientAsync(url).then((client) => {
-        return client.WSI3_PointRelais_RechercheAsync(args);
-    }).then((result) => {
-        console.log(result);
-        res.status(200).json(result);
-    }).catch((err) => {
+    try {
+        const client = await soap.createClientAsync(url);
+        const result = await client.WSI3_PointRelais_RechercheAsync(args);
+        res.status(200).json(result[0]);
+    } catch (err) {
         res.status(500).send(err.toString());
-    });
+    }
 });
 
 const PORT = 3000;
