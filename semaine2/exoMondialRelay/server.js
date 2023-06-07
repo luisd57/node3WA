@@ -9,7 +9,7 @@ app.use(express.json());
 const url = 'http://api.mondialrelay.com/Web_Services.asmx?wsdl';
 
 const relaySearchSchema = Joi.object({
-    enseigne: Joi.string().required(),
+    enseigne: Joi.string().uppercase().required(),
     pays: Joi.string().length(2).regex(/^[A-Z]+$/).uppercase().required(),
     ville: Joi.string().required(),
     cp: Joi.string().required(),
