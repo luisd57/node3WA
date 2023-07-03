@@ -2,6 +2,7 @@ import express from 'express';
 import session from 'express-session';
 import mongoose from 'mongoose';
 import authRoutes from './routes/authRoutes.js';
+import passengerRoutes from './routes/passengerRoutes.js';
 import config from './config.js';
 
 const app = express();
@@ -16,5 +17,6 @@ mongoose.connect(`mongodb://${db.host}:${db.port}/${db.name}`, { useNewUrlParser
 app.use(session(sessionConfig));
 
 app.use(authRoutes);
+app.use('/passengers', passengerRoutes);
 
 app.listen(appConfig.port, () => console.log(`Server started on port ${appConfig.port}`));
