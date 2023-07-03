@@ -22,3 +22,14 @@ export const login = async (req, res) => {
   req.session.userId = user._id;
   res.status(200).send(user);
 };
+
+export const logout = (req, res) => {
+  req.session.destroy(err => {
+    if (err) {
+      return res.status(500).send({ error: 'Could not log out.' });
+    } else {
+      res.status(200).send({ message: 'Logged out.' });
+    }
+  });
+};
+

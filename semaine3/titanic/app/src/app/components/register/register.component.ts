@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { User } from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -9,19 +11,34 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class RegisterComponent {
 
-  user: User = {
-    username: '',
-    password: ''
-  };
+  registerForm: FormGroup;
+  isSubmitting: boolean = false;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router) {
 
-  register(): void {
-    this.authService.register(this.user).subscribe({
-      next: (response) => console.log('User registered successfully.'),
-      error: (error) => console.error('Registration failed.')
+    this.registerForm = this.formBuilder.group({
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
-  
+
+  onSubmitRegister(): void {
+    this.isSubmitting = true;
+    const user: User = this.registerForm.value;
+
+    this.authService.register(user).subscribe({
+      next: (response) => {
+        this.isSubmitting = false;
+        console.log('User registered successfully.');
+        alert(`Welcome ${response.username}`);
+        this.router.navigate(['/passengers']);
+      },
+      error: (error) => {
+        this.isSubmitting = false;
+        console.error('Registration failed.');
+      }
+    });
+  }
+
 
 }

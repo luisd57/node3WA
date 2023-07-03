@@ -4,8 +4,10 @@ import mongoose from 'mongoose';
 import authRoutes from './routes/authRoutes.js';
 import passengerRoutes from './routes/passengerRoutes.js';
 import config from './config.js';
+import cors from 'cors';
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 const { db, session: sessionConfig, app: appConfig } = config;

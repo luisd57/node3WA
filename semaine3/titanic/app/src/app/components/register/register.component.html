@@ -1,1 +1,40 @@
-<p>register works!</p>
+<header>
+    <h1 class="text-center text-3xl font-bold text-cyan-500">Titanic</h1>
+</header>
+<div class="h-screen w-1/2 mx-auto flex justify-center items-center">
+    <form class="bg-white p-6 border" [formGroup]="registerForm" (ngSubmit)="onSubmitRegister()">
+        <h2 class="text-lg mb-4 text-center font-medium text-cyan-500">Sign in</h2>
+        <div class="form-group">
+            <label class="block text-gray-700 font-medium mb-2" for="username">
+                Username
+            </label>
+            <input class="w-full border border-gray-400 p-2" type="username" formControlName="username" id="username"
+                [ngClass]="{ 'is-invalid': registerForm.get('username')?.invalid && registerForm.get('username')?.touched }"
+                required>
+            <p class="text-red-500" *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched">
+                Please enter a valid username.
+            </p>
+        </div>
+        <div class="form-group">
+            <label class="block text-gray-700 font-medium mb-2" for="password">
+                Password
+            </label>
+            <input class="w-full border border-gray-400 p-2" type="password" formControlName="password" id="password"
+                [ngClass]="{ 'is-invalid': registerForm.get('password')?.invalid && registerForm.get('password')?.touched }"
+                required>
+            <p class="text-red-500"
+                *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+                Password must be at least 6 characters.
+            </p>
+        </div>
+        <div class="form-group text-center">
+            <button class="bg-cyan-500 text-white py-2 px-4 rounded-lg hover:bg-cyan-600 mt-4" type="submit"
+                [disabled]="isSubmitting">
+                Register
+            </button>
+            <div class="text-red-500" *ngIf="isSubmitting">
+                Signing up, please wait...
+            </div>
+        </div>
+    </form>
+</div>
