@@ -9,10 +9,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
+import { NgChartsModule } from 'ng2-charts';
+
+
 import { PassengerComponent } from './components/passenger/passenger.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
-import { NgChartsModule } from 'ng2-charts';
 import { LayoutComponent } from './components/layout/layout.component';
 
 @NgModule({
