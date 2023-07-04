@@ -5,8 +5,7 @@
                 <!-- **** LOGO *** -->
                 <div class="flex items-center flex-shrink-0 px-4 bg">
                     <a href="#" class="flex items-center">
-                        <img src="assets/titanicLogo.webp"
-                            class="h-6 mr-3 sm:h-9 rounded-full" alt="Titanic Logo">
+                        <img src="assets/titanicLogo.webp" class="h-6 mr-3 sm:h-9 rounded-full" alt="Titanic Logo">
                         <span class="text-cyan-500 self-center text-xl font-semibold whitespace-nowrap ">Titanic</span>
                     </a>
                 </div>
@@ -25,8 +24,12 @@
             <div class="flex-shrink-0 flex border-t p-4">
                 <a class="flex-shrink-0 group block">
                     <div class="flex items-center">
+                        <div class="mr-4 bg-cyan-500 rounded-full h-8 w-8 flex items-center justify-center text-white">
+                            <!-- Display the first two letters of the user's name -->
+                            {{currentUser.username.substring(0,2) | uppercase}}
+                        </div>
                         <button (click)="onClickDisconnect()"
-                            class="w-48 text-white bg-cyan-700 flex items-center px-4 py-2 font-medium rounded-md">
+                            class="w-auto text-white bg-cyan-700 flex items-center px-4 py-2 font-medium rounded-md">
                             <fa-icon [icon]="['fas', 'arrow-right-from-bracket']"
                                 class="text-xl mr-3 mb-2 flex-shrink-0 h-6 w-6"></fa-icon>Disconnect
                         </button>
