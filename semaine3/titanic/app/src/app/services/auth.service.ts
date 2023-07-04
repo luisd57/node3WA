@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../models/User';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +9,8 @@ import { Router } from '@angular/router';
 export class AuthService {
 
   private baseUrl = 'http://localhost:3000';
+
+  private currentUser!: User;
 
   constructor(private http: HttpClient) { }
 
@@ -22,7 +23,28 @@ export class AuthService {
   }
 
   logout(): Observable<any> {
+    sessionStorage.removeItem('currentUser');
     return this.http.post(`${this.baseUrl}/logout`, {});
   }
+
+  googleLogin() {
+    window.location.href = `${this.baseUrl}/auth/google`;
+  }
+
+  setUser(user: User): void {
+    this.currentUser = user;
+    sessionStorage.setItem('currentUser', JSON.stringify(user));
+  }
+
+  getUser(): User {
+    if (!this.currentUser) {
+      const storedUser = sessionStorage.getItem('currentUser');
+      if (storedUser) {
+        this.currentUser = JSON.parse(storedUser);
+      }
+    }
+    return this.currentUser;
+  }
+
 
 }

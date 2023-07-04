@@ -1,5 +1,7 @@
 import express from 'express';
 import passport from 'passport';
+import { register, login, logout } from '../controllers/authController.js';
+
 
 const router = express.Router();
 
@@ -8,25 +10,14 @@ router.get('/auth/google', passport.authenticate('google', {
 }));
 
 router.get('/auth/google/callback', passport.authenticate('google'), (req, res) => {
-  res.json({ status: 'success', message: 'User authenticated', user: req.user });
+  const userParam = encodeURIComponent(JSON.stringify(req.user));
+
+  res.redirect(`http://localhost:4200/auth/callback?user=${userParam}`);
 });
 
-router.get('/auth/logout', (req, res) => {
-  req.logout();
-  res.json({ status: 'success', message: 'User logged out' });
-});
+router.post('/register', register);
+router.post('/login', login);
+router.post('/logout', logout);
+
 
 export default router;
-
-
-
-// import express from 'express';
-// import { register, login, logout } from '../controllers/authController.js';
-
-// const router = express.Router();
-
-// router.post('/register', register);
-// router.post('/login', login);
-// router.post('/logout', logout);
-
-// export default router;

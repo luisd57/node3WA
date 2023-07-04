@@ -23,22 +23,29 @@ export class LoginComponent {
   }
 
   onSubmitLogin(): void {
-    this.isSubmitting = true;
+    this.isSubmitting = !this.isSubmitting;
     const user: User = this.loginForm.value;
 
     this.authService.login(user).subscribe({
       next: (response) => {
-        this.isSubmitting = false;
+        this.isLoginError = !this.isLoginError;
         console.log('User logged in successfully.');
         alert(`Welcome ${response.username}`);
+        this.authService.setUser(response);
         this.router.navigate(['/passengers']);
       },
       error: (error) => {
-        this.isSubmitting = false;
-        this.isLoginError = true;
+        this.isSubmitting = !this.isSubmitting;
+        this.isLoginError = !this.isLoginError;
         console.error('Login failed.');
       }
     });
   }
+
+  onGoogleLogin(): void {
+    this.isLoginError = !this.isLoginError;
+    this.authService.googleLogin();
+}
+
 
 }

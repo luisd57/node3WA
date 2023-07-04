@@ -24,19 +24,20 @@ export class RegisterComponent {
   }
 
   onSubmitRegister(): void {
-    this.isSubmitting = true;
+    this.isSubmitting = !this.isSubmitting;
     const user: User = this.registerForm.value;
 
     this.authService.register(user).subscribe({
       next: (response) => {
-        this.isSubmitting = false;
+        this.isSubmitting = !this.isSubmitting;
         console.log('User registered successfully.');
         alert(`Welcome ${response.username}`);
+        this.authService.setUser(response);
         this.router.navigate(['/passengers']);
       },
       error: (error) => {
-        this.isSubmitting = false;
-        this.isRegisterError = true;
+        this.isSubmitting = !this.isSubmitting;
+        this.isRegisterError = !this.isRegisterError;
         console.error('Registration failed.');
       }
     });

@@ -5,6 +5,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { PassengerComponent } from './components/passenger/passenger.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { AuthComponent } from './components/auth/auth.component';
+import { AuthCallbakComponent } from './components/auth-callbak/auth-callbak.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
       { path: "passengers", component: PassengerComponent },
     ]
   },
+  { path: 'auth/callback', component: AuthCallbakComponent }
 ];
 
 @NgModule({
