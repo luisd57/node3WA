@@ -42,10 +42,4 @@ export class LoginComponent {
     });
   }
 
-  onGoogleLogin(): void {
-    this.isLoginError = !this.isLoginError;
-    this.authService.googleLogin();
-}
-
-
 }

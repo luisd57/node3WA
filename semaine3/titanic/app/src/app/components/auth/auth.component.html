@@ -5,15 +5,25 @@
     <div class="bg-white p-6 border">
         <ul class="flex border-b mb-4">
             <li class="mr-2" (click)="activeTab='login'">
-                <a [ngClass]="activeTab === 'login' ? 'border-b-2 border-cyan-500 text-cyan-500' : ''" 
-                class="inline-block py-2 px-4 font-semibold cursor-pointer">Login</a>
+                <a [ngClass]="activeTab === 'login' ? 'border-b-2 border-cyan-500 text-cyan-500' : ''"
+                    class="inline-block py-2 px-4 font-semibold cursor-pointer">Login</a>
             </li>
             <li class="mr-2" (click)="activeTab='register'">
-                <a [ngClass]="activeTab === 'register' ? 'border-b-2 border-cyan-500 text-cyan-500' : ''" 
-                class="inline-block py-2 px-4 font-semibold cursor-pointer">Register</a>
+                <a [ngClass]="activeTab === 'register' ? 'border-b-2 border-cyan-500 text-cyan-500' : ''"
+                    class="inline-block py-2 px-4 font-semibold cursor-pointer">Register</a>
             </li>
         </ul>
         <app-login *ngIf="activeTab === 'login'"></app-login>
         <app-register *ngIf="activeTab === 'register'"></app-register>
+        <button
+            class="mt-5 m-auto bg-white text-blue-700 border border-gray-300 hover:bg-gray-50 flex items-center justify-center px-8 py-2 rounded-md shadow-sm text-sm font-medium"
+            (click)="onGoogleLogin()">
+            <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M9 11v2.4h4.32c-.18 1.17-1.35 3.43-4.32 3.43-2.6 0-4.72-2.16-4.72-4.82s2.12-4.82 4.72-4.82c1.47 0 2.44.63 3 1.17l2.04-1.97C11.07 6.09 9.69 5.5 8 5.5 4.13 5.5 1 8.63 1 12s3.13 6.5 7 6.5c4.04 0 6.7-2.84 6.7-6.85 0-.46-.05-.81-.12-1.16H9z"
+                    fill="currentColor"></path>
+            </svg>
+            Sign in with Google
+        </button>
     </div>
 </div>

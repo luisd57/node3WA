@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AuthComponent {
   activeTab: string = 'login';
+
+  constructor(private authService: AuthService) { }
+
+  onGoogleLogin(): void {
+    this.authService.googleLogin();
+  }
 }
