@@ -11,7 +11,6 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { NgChartsModule } from 'ng2-charts';
 
-
 import { PassengerComponent } from './components/passenger/passenger.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
@@ -27,7 +26,8 @@ import { AuthCallbakComponent } from './components/auth-callbak/auth-callbak.com
     LoginComponent,
     LayoutComponent,
     AuthComponent,
-    AuthCallbakComponent
+    AuthCallbakComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -36,7 +36,7 @@ import { AuthCallbakComponent } from './components/auth-callbak/auth-callbak.com
     FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
-    NgChartsModule 
+    NgChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -45,4 +45,4 @@ export class AppModule {
   constructor(library: FaIconLibrary) {
     library.addIconPacks(fas, far);
   }
- }
+}

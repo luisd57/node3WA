@@ -6,6 +6,7 @@ import { PassengerComponent } from './components/passenger/passenger.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { AuthCallbakComponent } from './components/auth-callbak/auth-callbak.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -16,12 +17,12 @@ const routes: Routes = [
     ]
   },
   {
-    path: "", component: LayoutComponent,
+    path: "", component: LayoutComponent, canActivate: [AuthGuard],
     children: [
       { path: "passengers", component: PassengerComponent },
     ]
   },
-  { path: 'auth/callback', component: AuthCallbakComponent }
+  { path: 'auth/callback', component: AuthCallbakComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

@@ -46,5 +46,9 @@ export class AuthService {
     return this.currentUser;
   }
 
+  isAuthenticated(): boolean {
+    return !!sessionStorage.getItem('currentUser');
+  }
+
 
 }
