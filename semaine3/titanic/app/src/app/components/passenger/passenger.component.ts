@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ChartOptions } from 'chart.js';
-import { Subject, Subscription, map, switchMap, takeUntil } from 'rxjs';
+import { Subject, map, switchMap, takeUntil } from 'rxjs';
 import { Passenger } from 'src/app/models/Passenger';
 import { PassengersService } from 'src/app/services/passengers.service';
 
@@ -21,6 +21,12 @@ export class PassengerComponent implements OnDestroy {
   private destroy$ = new Subject<void>();
 
   constructor(private passengerService: PassengersService) { }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
 
   filterByAliveWomen() {
     this.passengerService.getAllPassengers().pipe(
@@ -73,9 +79,5 @@ export class PassengerComponent implements OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
 
 }

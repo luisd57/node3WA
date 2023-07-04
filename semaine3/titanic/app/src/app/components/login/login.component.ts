@@ -13,6 +13,7 @@ export class LoginComponent {
 
   loginForm: FormGroup;
   isSubmitting: boolean = false;
+  isLoginError: boolean = false;
 
   constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router) {
     this.loginForm = this.formBuilder.group({
@@ -34,6 +35,7 @@ export class LoginComponent {
       },
       error: (error) => {
         this.isSubmitting = false;
+        this.isLoginError = true;
         console.error('Login failed.');
       }
     });

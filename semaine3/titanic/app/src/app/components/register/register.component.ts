@@ -13,6 +13,7 @@ export class RegisterComponent {
 
   registerForm: FormGroup;
   isSubmitting: boolean = false;
+  isRegisterError: boolean = false;
 
   constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router) {
 
@@ -35,6 +36,7 @@ export class RegisterComponent {
       },
       error: (error) => {
         this.isSubmitting = false;
+        this.isRegisterError = true;
         console.error('Registration failed.');
       }
     });

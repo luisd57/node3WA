@@ -1,0 +1,19 @@
+<header>
+    <h1 class="text-center text-3xl font-bold text-cyan-500">Titanic</h1>
+</header>
+<div class="h-screen w-1/2 mx-auto flex justify-center items-center">
+    <div class="bg-white p-6 border">
+        <ul class="flex border-b mb-4">
+            <li class="mr-2" (click)="activeTab='login'">
+                <a [ngClass]="activeTab === 'login' ? 'border-b-2 border-cyan-500 text-cyan-500' : ''" 
+                class="inline-block py-2 px-4 font-semibold cursor-pointer">Login</a>
+            </li>
+            <li class="mr-2" (click)="activeTab='register'">
+                <a [ngClass]="activeTab === 'register' ? 'border-b-2 border-cyan-500 text-cyan-500' : ''" 
+                class="inline-block py-2 px-4 font-semibold cursor-pointer">Register</a>
+            </li>
+        </ul>
+        <app-login *ngIf="activeTab === 'login'"></app-login>
+        <app-register *ngIf="activeTab === 'register'"></app-register>
+    </div>
+</div>
