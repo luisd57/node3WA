@@ -6,17 +6,22 @@ const createFurniture = async (req, res) => {
 
     const allowedFurniture = ['wardrobe', 'shelf'];
 
-    const allMaterialsExist = await Promise.all(
-        materials.map((materialId) => Material.exists({ _id: materialId }))
-    );
+    let allMaterialsExist;
+    try {
+        allMaterialsExist = await Promise.all(
+            materials.map((materialId) => Material.exists({ _id: materialId }))
+        );
+    } catch (error) {
+        return res.status(400).json({ error: 'Invalid material ID provided' });
+    }
 
     if (allMaterialsExist.includes(false)) {
         return res.status(400).json({ error: 'One or more materials do not exist' });
     }
 
     try {
-        if (!allowedFurniture.includes(name.toLowerCase())) {
-            return res.status(400).json({ error: 'Invalid furniture name' });
+        if (!allowedFurniture.includes(category.toLowerCase())) {
+            return res.status(400).json({ error: 'Invalid furniture category' });
         }
 
         const furniture = new Furniture({ name, category, materials });
