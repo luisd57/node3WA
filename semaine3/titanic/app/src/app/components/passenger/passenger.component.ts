@@ -41,7 +41,7 @@ export class PassengerComponent implements OnDestroy {
       })
     ).subscribe(({ totalWomen, aliveWomen }) => {
       this.currentChartData.data = [totalWomen, aliveWomen];
-      this.currentChartData.labels = ['Total Women', 'Alive Women'];
+      this.currentChartData.labels = ['Deceased Women', 'Alive Women'];
     });
   }
 
@@ -58,7 +58,7 @@ export class PassengerComponent implements OnDestroy {
       })
     ).subscribe(({ totalMen, aliveMen }) => {
       this.currentChartData.data = [totalMen, aliveMen];
-      this.currentChartData.labels = ['Total Men', 'Alive Men'];
+      this.currentChartData.labels = ['Deceased Men', 'Alive Men'];
     });
   }
 
