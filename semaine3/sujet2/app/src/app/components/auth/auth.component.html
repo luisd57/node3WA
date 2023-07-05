@@ -1,16 +1,16 @@
-<header>
-    <h1 class="text-center text-3xl font-bold text-cyan-500 mt-12">CraftBoard</h1>
-</header>
-<div class="h-screen w-1/2 mx-auto flex justify-center items-center">
-    <div class="bg-white p-6 border">
+<div class="flex flex-col justify-center items-center h-screen bg-slate-500">
+    <header class="mb-24">
+        <h1 class="text-center text-3xl font-bold text-cyan-500">CraftBoard</h1>
+    </header>
+    <div class="p-6 mb-10 border">
         <ul class="flex border-b mb-4">
             <li class="mr-2" (click)="activeTab='login'">
-                <a [ngClass]="activeTab === 'login' ? 'border-b-2 border-cyan-500 text-cyan-500' : ''"
-                    class="inline-block py-2 px-4 font-semibold cursor-pointer">Login</a>
+                <a [ngClass]="{'border-b-2 border-cyan-500 text-cyan-500': activeTab === 'login'}" 
+                   class="inline-block py-2 px-4 font-semibold cursor-pointer">Login</a>
             </li>
             <li class="mr-2" (click)="activeTab='register'">
-                <a [ngClass]="activeTab === 'register' ? 'border-b-2 border-cyan-500 text-cyan-500' : ''"
-                    class="inline-block py-2 px-4 font-semibold cursor-pointer">Register</a>
+                <a [ngClass]="{'border-b-2 border-cyan-500 text-cyan-500': activeTab === 'register'}" 
+                   class="inline-block py-2 px-4 font-semibold cursor-pointer">Register</a>
             </li>
         </ul>
         <app-login *ngIf="activeTab === 'login'"></app-login>

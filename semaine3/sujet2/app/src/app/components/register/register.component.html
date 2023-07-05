@@ -1,1 +1,36 @@
-<p>register works!</p>
+<form class="bg-slate-500 p-6 border" [formGroup]="registerForm" (ngSubmit)="onSubmitRegister()">
+    <div class="form-group">
+        <label class="block font-medium mb-2" for="username">
+            Username
+        </label>
+        <input class="w-full border bg-slate-500 border-gray-400 p-2" type="username" formControlName="username" id="username"
+            [ngClass]="{ 'is-invalid': registerForm.get('username')?.invalid && registerForm.get('username')?.touched }"
+            required>
+        <p class="text-red-500" *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched">
+            Please enter a valid username.
+        </p>
+    </div>
+    <div class="form-group">
+        <label class="block font-medium mb-2" for="password">
+            Password
+        </label>
+        <input class="w-full border bg-slate-500 border-gray-400 p-2" type="password" formControlName="password" id="password"
+            [ngClass]="{ 'is-invalid': registerForm.get('password')?.invalid && registerForm.get('password')?.touched }"
+            required>
+        <p class="text-red-500" *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+            Password must be at least 6 characters.
+        </p>
+    </div>
+    <div class="form-group text-center">
+        <button class="bg-cyan-500 text-white py-2 px-4 rounded-lg hover:bg-cyan-600 mt-4" type="submit"
+            >
+            Confirm
+        </button>
+        <div class="text-red-500" *ngIf="isRegisterError">
+            Registration failed.
+        </div>
+        <div class="text-red-500" *ngIf="isSubmitting">
+            Signing up, please wait...
+        </div>
+    </div>
+</form>
