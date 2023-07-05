@@ -4,6 +4,9 @@ import cors from 'cors';
 import session from 'express-session';
 import dotenv from 'dotenv';
 import authRoutes from './routes/authRoutes.js';
+import companyRoutes from './routes/companyRoutes.js';
+import materialRoutes from './routes/materialRoutes.js';
+import furnitureRoutes from './routes/furnitureRoutes.js';
 
 dotenv.config();
 const app = express();
@@ -23,7 +26,9 @@ app.use(session({
 }));
 
 app.use('/auth', authRoutes);
-
+app.use('/company', companyRoutes);
+app.use('/material', materialRoutes);
+app.use('/furniture', furnitureRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port: ${PORT}`);
