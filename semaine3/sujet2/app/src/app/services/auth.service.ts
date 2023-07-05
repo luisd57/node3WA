@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AuthService {
 
-  private baseUrl = 'http://localhost:3000';
+  private baseUrl = 'http://localhost:3000/auth';
 
   private currentUser!: User;
 
