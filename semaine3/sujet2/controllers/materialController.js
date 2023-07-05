@@ -2,7 +2,7 @@ import Material from '../models/Material.js';
 import Company from '../models/Company.js';
 
 const createMaterial = async (req, res) => {
-    const { name, company: companyId } = req.body;
+    const { name, company: companyId, stock } = req.body;
 
     const allowedMaterials = ['ash', 'oak', 'walnut', 'stainless steel', 'aluminum', 'plastic'];
     const allowedCompanies = ['bbois', 'metalo', 'pplastique'];
@@ -18,7 +18,7 @@ const createMaterial = async (req, res) => {
             return res.status(400).json({ error: 'Invalid material name or company' });
         }
 
-        const material = new Material({ name, company: companyId });
+        const material = new Material({ name, company: companyId, stock });
         await material.save();
 
         res.status(200).json(material);
@@ -27,5 +27,21 @@ const createMaterial = async (req, res) => {
     }
 };
 
+const getMaterial = async (req, res) => {
+    const { id } = req.params;
 
-export { createMaterial };
+    try {
+        const material = await Material.findById(id).populate('company');
+
+        if (!material) {
+            return res.status(404).json({ error: 'Material not found' });
+        }
+
+        res.status(200).json(material);
+    } catch (error) {
+        res.status(500).json({ error: error.toString() });
+    }
+};
+
+
+export { createMaterial, getMaterial };

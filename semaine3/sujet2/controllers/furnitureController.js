@@ -4,7 +4,7 @@ import Material from '../models/Material.js';
 const createFurniture = async (req, res) => {
     const { name, category, materials } = req.body;
 
-    const allowedFurniture = ['wardrobe', 'shelf'];
+    const allowedCategory = ['wardrobe', 'shelf'];
 
     let allMaterialsExist;
     try {
@@ -16,12 +16,22 @@ const createFurniture = async (req, res) => {
     }
 
     try {
-        if (!allowedFurniture.includes(category.toLowerCase())) {
+        if (!allowedCategory.includes(category.toLowerCase())) {
             return res.status(400).json({ error: 'Invalid furniture category' });
         }
 
         const furniture = new Furniture({ name, category, materials });
         await furniture.save();
+
+        await Promise.all(
+            materials.map((materialId) => {
+                return Material.findByIdAndUpdate(
+                    materialId,
+                    { $inc: { stock: -1 } },  // decrement stock by 1
+                    { new: true, runValidators: true }
+                );
+            })
+        );
 
         res.status(200).json(furniture);
     } catch (error) {
