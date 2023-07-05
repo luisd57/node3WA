@@ -1,9 +1,24 @@
 import Furniture from '../models/Furniture.js';
+import Material from '../models/Material.js';
 
 const createFurniture = async (req, res) => {
     const { name, category, materials } = req.body;
 
+    const allowedFurniture = ['wardrobe', 'shelf'];
+
+    const allMaterialsExist = await Promise.all(
+        materials.map((materialId) => Material.exists({ _id: materialId }))
+    );
+
+    if (allMaterialsExist.includes(false)) {
+        return res.status(400).json({ error: 'One or more materials do not exist' });
+    }
+
     try {
+        if (!allowedFurniture.includes(name.toLowerCase())) {
+            return res.status(400).json({ error: 'Invalid furniture name' });
+        }
+
         const furniture = new Furniture({ name, category, materials });
         await furniture.save();
 
