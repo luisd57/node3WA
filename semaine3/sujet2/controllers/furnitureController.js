@@ -15,10 +15,6 @@ const createFurniture = async (req, res) => {
         return res.status(400).json({ error: 'Invalid material ID provided' });
     }
 
-    if (allMaterialsExist.includes(false)) {
-        return res.status(400).json({ error: 'One or more materials do not exist' });
-    }
-
     try {
         if (!allowedFurniture.includes(category.toLowerCase())) {
             return res.status(400).json({ error: 'Invalid furniture category' });
