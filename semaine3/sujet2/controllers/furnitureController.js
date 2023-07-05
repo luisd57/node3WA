@@ -6,11 +6,19 @@ const createFurniture = async (req, res) => {
 
     const allowedCategory = ['wardrobe', 'shelf'];
 
-    let allMaterialsExist;
+    let materialsData;
     try {
-        allMaterialsExist = await Promise.all(
-            materials.map((materialId) => Material.exists({ _id: materialId }))
-        );
+        materialsData = await Material.find({
+            _id: { $in: materials },
+        });
+
+        for (let material of materialsData) {
+            if (material.stock <= 0) {
+                return res.status(400).json({
+                    error: `Insufficient stock for material with id ${material._id}`,
+                });
+            }
+        }
     } catch (error) {
         return res.status(400).json({ error: 'Invalid material ID provided' });
     }
@@ -23,15 +31,12 @@ const createFurniture = async (req, res) => {
         const furniture = new Furniture({ name, category, materials });
         await furniture.save();
 
-        await Promise.all(
-            materials.map((materialId) => {
-                return Material.findByIdAndUpdate(
-                    materialId,
-                    { $inc: { stock: -1 } },  // decrement stock by 1
-                    { new: true, runValidators: true }
-                );
-            })
-        );
+        // Decrement stock of each material
+        for (let material of materialsData) {
+            material.stock -= 1;
+            await material.save();
+        }
+
 
         res.status(200).json(furniture);
     } catch (error) {
