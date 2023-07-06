@@ -5,12 +5,14 @@
                 <p class="text-lg font-semibold overflow-y-auto">{{ furniture.name }}</p>
                 <p class="font-semibold overflow-y-auto">{{ furniture.category }}</p>
                 <div class="font-semibold flex-grow overflow-y-auto" *ngFor="let material of furniture.materials">
-                    <span class="cursor-pointer hover:text-customBrownColor" [ngbTooltip]="tooltipContent"
-                        placement="right">{{ material.name }}</span>
+                    <span class="cursor-pointer hover:text-customLighBeigeColor" [ngbTooltip]="tooltipContent"
+                        placement="top"><fa-icon [icon]="['fas', 'circle']" [ngClass]="material.name"></fa-icon> {{ material.name }}</span>
                     <ng-template #tooltipContent>
-                        <div>Name: {{ material.name }}</div>
-                        <div>Company: {{ material.company.name }}</div>
-                        <div>Stock: {{ material.stock }}</div>
+                        <div class="shadow-lg p-2 bg-customBeigeColor">
+                            <div>Name: {{ material.name }}</div>
+                            <div>Company: {{ material.company.name }}</div>
+                            <div>Stock: {{ material.stock }}</div>
+                        </div>
                     </ng-template>
                 </div>
             </div>
