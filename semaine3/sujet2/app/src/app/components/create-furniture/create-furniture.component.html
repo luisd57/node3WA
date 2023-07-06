@@ -1,0 +1,20 @@
+<!-- furniture-create.component.html -->
+<div class="furniture-form">
+    <h2>Create Furniture</h2>
+    <form (ngSubmit)="onSubmit()">
+        <label for="name">Name:</label>
+        <input type="text" [(ngModel)]="name" name="name" required>
+
+        <label for="category">Category:</label>
+        <select [(ngModel)]="category" name="category" required>
+            <option *ngFor="let option of categoryOptions" [value]="option">{{ option }}</option>
+        </select>
+
+        <label for="materials">Materials:</label>
+        <select [(ngModel)]="materials" name="materials" required multiple>
+            <option *ngFor="let material of materialList" [value]="material._id">{{ material.name }}</option>
+        </select>
+
+        <button type="submit">Create</button>
+    </form>
+</div>

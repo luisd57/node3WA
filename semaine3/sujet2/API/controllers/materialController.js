@@ -43,5 +43,14 @@ const getMaterial = async (req, res) => {
     }
 };
 
+const listMaterials = async (req, res) => {
+    try {
+        const materials = await Material.find().populate('company');
+        res.status(200).json(materials);
+    } catch (error) {
+        res.status(500).json({ error: error.toString() });
+    }
+};
 
-export { createMaterial, getMaterial };
+
+export { createMaterial, getMaterial, listMaterials };

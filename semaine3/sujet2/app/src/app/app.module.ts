@@ -10,19 +10,25 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { AuthFormComponent } from './components/auth-form/auth-form.component';
+import { CreateFurnitureComponent } from './components/create-furniture/create-furniture.component';
+import { FurnitureListComponent } from './components/furniture-list/furniture-list.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
-    AuthFormComponent
+    AuthFormComponent,
+    CreateFurnitureComponent,
+    FurnitureListComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule, ReactiveFormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NgbModule
     
   ],
   providers: [],
