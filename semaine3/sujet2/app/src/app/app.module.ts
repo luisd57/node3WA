@@ -13,6 +13,7 @@ import { AuthFormComponent } from './components/auth-form/auth-form.component';
 import { CreateFurnitureComponent } from './components/create-furniture/create-furniture.component';
 import { FurnitureListComponent } from './components/furniture-list/furniture-list.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { LayoutComponent } from './components/layout/layout.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     AuthComponent,
     AuthFormComponent,
     CreateFurnitureComponent,
-    FurnitureListComponent
+    FurnitureListComponent,
+    LayoutComponent
   ],
   imports: [
     BrowserModule,

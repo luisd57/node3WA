@@ -44,4 +44,5 @@ export class CreateFurnitureComponent implements OnInit {
       }
     });
   }
+  
 }

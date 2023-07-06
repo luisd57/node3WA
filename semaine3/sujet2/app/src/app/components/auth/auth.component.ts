@@ -19,6 +19,7 @@ export class AuthComponent {
       next: (response) => {
         console.log('User logged in successfully.');
         alert(`Welcome ${response.username}`);
+        this.router.navigate(['/furniture/list']);
       },
       error: (error) => {
         console.error('Login failed.');
@@ -31,6 +32,7 @@ export class AuthComponent {
     this.authService.register(user).subscribe({
       next: (response) => {
         console.log('User registered successfully.');
+        this.router.navigate(['/furniture/list']);
         alert(`Welcome ${response.username}`);
       },
       error: (error) => {
