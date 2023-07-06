@@ -1,9 +1,14 @@
 import bcrypt from 'bcryptjs';
 import User from '../models/User.js';
 
-export const register = async (req, res) => {
+const register = async (req, res) => {
   const { username, password } = req.body;
   try {
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
+      return res.status(400).send({ error: 'Username already exists.' });
+    }
+
     const user = new User({ username, password });
     await user.save();
     req.session.userId = user._id;
@@ -13,7 +18,7 @@ export const register = async (req, res) => {
   }
 };
 
-export const login = async (req, res) => {
+const login = async (req, res) => {
   const { username, password } = req.body;
   const user = await User.findOne({ username });
   if (!user || !await bcrypt.compare(password, user.password)) {
@@ -23,7 +28,7 @@ export const login = async (req, res) => {
   res.status(200).send(user);
 };
 
-export const logout = (req, res) => {
+const logout = (req, res) => {
   req.session.destroy(err => {
     if (err) {
       return res.status(500).send({ error: 'Could not log out.' });
@@ -33,3 +38,12 @@ export const logout = (req, res) => {
   });
 };
 
+const isAuthenticated = (req, res) => {
+  if (req.session.userId) {
+    res.status(200).json(true);
+  } else {
+    res.status(200).json(false);
+  }
+};
+
+export { register, login, logout, isAuthenticated }

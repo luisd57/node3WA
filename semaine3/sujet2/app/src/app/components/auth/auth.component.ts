@@ -18,8 +18,7 @@ export class AuthComponent {
       next: (response) => {
         console.log('User logged in successfully.');
         alert(`Welcome ${response.username}`);
-        this.authService.setUser(response);
-        this.router.navigate(['https://www.google.com/']);
+        // this.router.navigate(['/']);
       },
       error: (error) => {
         console.error('Login failed.');
@@ -32,7 +31,7 @@ export class AuthComponent {
       next: (response) => {
         console.log('User registered successfully.');
         alert(`Welcome ${response.username}`);
-        this.authService.setUser(response);
+        // this.router.navigate(['/']);
       },
       error: (error) => {
         console.error('Registration failed.');

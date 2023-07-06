@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { User } from 'src/app/models/User';
 
@@ -7,7 +7,7 @@ import { User } from 'src/app/models/User';
   templateUrl: './auth-form.component.html',
   styleUrls: ['./auth-form.component.css']
 })
-export class AuthFormComponent implements OnInit {
+export class AuthFormComponent {
 
   @Input() isLoginMode: boolean = true;
   @Output() onFormSubmit = new EventEmitter<User>();
@@ -22,8 +22,6 @@ export class AuthFormComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
-
-  ngOnInit(): void {}
 
   onSubmit(): void {
     this.isSubmitting = true;
