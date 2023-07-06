@@ -19,7 +19,6 @@ export class AuthComponent {
       next: (response) => {
         console.log('User logged in successfully.');
         alert(`Welcome ${response.username}`);
-        this.errorMessage = '';
       },
       error: (error) => {
         console.error('Login failed.');
@@ -33,7 +32,6 @@ export class AuthComponent {
       next: (response) => {
         console.log('User registered successfully.');
         alert(`Welcome ${response.username}`);
-        this.errorMessage = '';
       },
       error: (error) => {
         console.error('Registration failed.');
