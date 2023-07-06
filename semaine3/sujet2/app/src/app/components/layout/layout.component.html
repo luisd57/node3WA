@@ -1,14 +1,14 @@
-<nav class="flex items-center justify-between bg-customBrownColor p-3">
+<nav class="sticky top-0 flex items-center space-x-36 justify-between bg-customBrownColor p-3">
     <div class="flex items-center mr-6">
         <span class="font-semibold text-customBeigeColor text-xl tracking-tight">CraftBoard</span>
     </div>
     <div class="w-full flex items-center">
-        <div class="text-sm">
+        <div class="text-sm font-semibold flex space-x-36">
             <a [routerLink]="['/furniture/create']" class="text-customBeigeColor">
-                Create Furniture
+                Create
             </a>
             <a [routerLink]="['/furniture/list']" class="text-customBeigeColor">
-                List Furniture
+                List
             </a>
         </div>
     </div>

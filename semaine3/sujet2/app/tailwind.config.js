@@ -7,7 +7,8 @@ module.exports = {
     extend: {
       colors: {
         'customBeigeColor': '#f4f1e1',
-        'customBrownColor': '#321e1e'
+        'customBrownColor': '#321e1e',
+        'customLighBeigeColor': '#bdb498'
       },
     },
   },
