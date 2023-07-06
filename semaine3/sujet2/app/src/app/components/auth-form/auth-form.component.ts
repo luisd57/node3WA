@@ -10,6 +10,7 @@ import { User } from 'src/app/models/User';
 export class AuthFormComponent {
 
   @Input() isLoginMode: boolean = true;
+  @Input() errorMessage: string = '';
   @Output() onFormSubmit = new EventEmitter<User>();
 
   authForm: FormGroup;
@@ -26,6 +27,11 @@ export class AuthFormComponent {
   onSubmit(): void {
     this.isSubmitting = true;
     this.onFormSubmit.emit(this.authForm.value);
+  }
+
+  setErrorMessage(message: string): void {
+    this.errorMessage = message;
+    this.isError = true;
   }
 
 }

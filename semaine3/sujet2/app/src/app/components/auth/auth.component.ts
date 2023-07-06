@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class AuthComponent {
   activeTab: string = 'login';
+  errorMessage: string = '';
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -18,10 +19,11 @@ export class AuthComponent {
       next: (response) => {
         console.log('User logged in successfully.');
         alert(`Welcome ${response.username}`);
-        // this.router.navigate(['/']);
+        this.errorMessage = '';
       },
       error: (error) => {
         console.error('Login failed.');
+        this.errorMessage = error.message;
       }
     });
   }
@@ -31,10 +33,11 @@ export class AuthComponent {
       next: (response) => {
         console.log('User registered successfully.');
         alert(`Welcome ${response.username}`);
-        // this.router.navigate(['/']);
+        this.errorMessage = '';
       },
       error: (error) => {
         console.error('Registration failed.');
+        this.errorMessage = error.message;
       }
     });
   }
