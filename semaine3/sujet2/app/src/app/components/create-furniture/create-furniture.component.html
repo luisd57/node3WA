@@ -1,6 +1,6 @@
 <div class="flex flex-col justify-center items-center h-screen">
     <h2 class="text-center text-2xl font-semibold mb-6">Create Furniture</h2>
-    <form class="p-6 border border-customBrownColor" (ngSubmit)="onSubmit()">
+    <form class="p-6 w-1/5 border space-y-4 border-customBrownColor" (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label class="block font-medium mb-2" for="name">Name:</label>
             <input class="w-full border bg-customBeigeColor border-customBrownColor p-2" type="text" [(ngModel)]="name"
@@ -9,45 +9,27 @@
 
         <div class="form-group">
             <label class="block font-medium mb-2" for="category">Category:</label>
-            <select class="w-full border bg-customBeigeColor border-customBrownColor p-2" [(ngModel)]="category"
-                name="category" required>
-                <option class="font-medium" *ngFor="let option of categoryOptions" [value]="option">{{ option }}</option>
+            <select class="w-full font-medium border bg-customBeigeColor border-customBrownColor p-2"
+                [(ngModel)]="category" name="category" required>
+                <option class="font-medium" *ngFor="let option of categoryOptions" [value]="option">{{ option }}
+                </option>
             </select>
         </div>
 
         <div class="form-group">
             <label class="block font-medium mb-2" for="materials">Materials:</label>
-            <select class="w-full border bg-customBeigeColor border-customBrownColor p-2" [(ngModel)]="materials"
-                name="materials" required multiple>
-                <option class="font-medium" *ngFor="let material of materialList" [value]="material._id">{{ material.name }}</option>
+            <select class="w-full border overflow-auto bg-customBeigeColor border-customBrownColor p-2"
+                [(ngModel)]="materials" name="materials" required multiple>
+                <option class="font-medium" *ngFor="let material of materialList" [value]="material._id">{{
+                    material.name }}</option>
             </select>
         </div>
-
         <div class="form-group text-center">
-            <button class="bg-customBrownColor text-white py-2 px-4 rounded-sm hover:bg-cyan-600 mt-4"
-                type="submit">Create</button>
+            <button
+                class="bg-customBrownColor text-white py-2 px-4 rounded-sm hover:text-customBrownColor mt-4 border-2 border-customBrownColor hover:bg-customBeigeColor"
+                type="submit">
+                Create
+            </button>
         </div>
     </form>
 </div>
-
-
-
-<!-- <div>
-    <h2>Create Furniture</h2>
-    <form (ngSubmit)="onSubmit()">
-        <label for="name">Name:</label>
-        <input type="text" [(ngModel)]="name" name="name" required>
-
-        <label for="category">Category:</label>
-        <select [(ngModel)]="category" name="category" required>
-            <option *ngFor="let option of categoryOptions" [value]="option">{{ option }}</option>
-        </select>
-
-        <label for="materials">Materials:</label>
-        <select [(ngModel)]="materials" name="materials" required multiple>
-            <option *ngFor="let material of materialList" [value]="material._id">{{ material.name }}</option>
-        </select>
-
-        <button type="submit">Create</button>
-    </form>
-</div> -->

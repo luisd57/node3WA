@@ -1,10 +1,10 @@
-<div class="mt-32 h-screen">
-    <div class="h-1/2 grid grid-cols-3">
+<div class="mt-32 h-screen text-customBrownColor">
+    <div class="h-1/2 grid grid-cols-3" style="grid-auto-rows: minmax(30rem, auto)">
         <div *ngFor="let furniture of furnitureList">
-            <div class="border-2 border-customLighBeigeColor p-6 h-full w-full flex flex-col">
-                <h2 class="text-xl font-semibold mb-2 overflow-y-auto">{{ furniture.name }}</h2>
-                <p class="mb-4 overflow-y-auto">{{ furniture.category }}</p>
-                <div class="text-sm flex-grow overflow-y-auto" *ngFor="let material of furniture.materials">
+            <div class="border-2 border-customLighBeigeColor p-6 h-full min-h-0 w-full flex space-x-12 items-end">
+                <p class="text-lg font-semibold overflow-y-auto">{{ furniture.name }}</p>
+                <p class="font-semibold overflow-y-auto">{{ furniture.category }}</p>
+                <div class="font-semibold flex-grow overflow-y-auto" *ngFor="let material of furniture.materials">
                     <span class="cursor-pointer hover:text-customBrownColor" [ngbTooltip]="tooltipContent"
                         placement="right">{{ material.name }}</span>
                     <ng-template #tooltipContent>
