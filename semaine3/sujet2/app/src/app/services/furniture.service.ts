@@ -12,7 +12,7 @@ export class FurnitureService {
 
   private _furniture = new BehaviorSubject<Furniture[]>([]);
 
-  readonly furniture$ = this._furniture.asObservable();
+  public furniture$ = this._furniture.asObservable();
 
   constructor(private http: HttpClient) { }
 
