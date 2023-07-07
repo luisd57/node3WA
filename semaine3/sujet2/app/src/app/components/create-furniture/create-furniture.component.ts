@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Furniture } from 'src/app/models/Furniture';
 import { Material } from 'src/app/models/Material';
 import { FurnitureService } from 'src/app/services/furniture.service';
 import { MaterialService } from 'src/app/services/material.service';
@@ -23,25 +22,8 @@ export class CreateFurnitureComponent implements OnInit {
     this.materialService.listMaterials().subscribe((materials: Material[]) => {
       this.materialList = materials;
     });
+    this.materialService.updateMaterials();
   }
-
-  // onSubmit(): void {
-  //   if (!this.name || !this.category || this.materials.length === 0) {
-  //     alert('All fields are required');
-  //     return;
-  //   }
-
-  //   this.furnitureService.createFurniture(this.name, this.category, this.materials).subscribe({
-  //     next: () => {
-  //       alert(`Furniture "${this.name}" created successfully.`);
-  //       this.furnitureService.updateFurnitureList();
-  //     },
-  //     error: (error) => {
-  //       console.error('Creation of furniture failed.');
-  //       alert('Creation of furniture failed. Please try again.');
-  //     }
-  //   });
-  // }
 
   onSubmit(): void {
     if (!this.name || !this.category || Object.keys(this.materials).length === 0) {
@@ -55,6 +37,7 @@ export class CreateFurnitureComponent implements OnInit {
       next: () => {
         alert(`Furniture "${this.name}" created successfully.`);
         this.furnitureService.updateFurnitureList();
+        this.materialService.updateMaterials();
       },
       error: (error) => {
         console.error('Creation of furniture failed.');

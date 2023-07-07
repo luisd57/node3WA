@@ -30,7 +30,9 @@ export class MaterialChartComponent {
   private destroy$ = new Subject<void>();
 
   constructor(private materialService: MaterialService) {
-    this.filterByMaterial();
+    this.materialService.materials$.subscribe(materials => {
+      this.updateChart(materials);
+    });
   }
 
   ngOnDestroy(): void {
@@ -38,25 +40,19 @@ export class MaterialChartComponent {
     this.destroy$.complete();
   }
 
-  filterByMaterial() {
-    this.materialService.listMaterials().pipe(
-      takeUntil(this.destroy$),
-      map((materials: Material[]) => {
-        const materialData: number[] = [];
-        const materialLabels: string[] = [];
-        const materialColors: string[] = [];
+  updateChart(materials: Material[]): void {
+    const materialData: number[] = [];
+    const materialLabels: string[] = [];
+    const materialColors: string[] = [];
 
-        materials.forEach(material => {
-          materialLabels.push(material.name);
-          materialData.push(material.stock);
-          materialColors.push(this.colorCodes[material.name]);
-        });
-
-        return { materialData, materialLabels, materialColors };
-      })
-    ).subscribe(({ materialData, materialLabels, materialColors }) => {
-      this.barChartData = [{ data: materialData, label: 'Stock Quantity', backgroundColor: materialColors }];
-      this.barChartLabels = materialLabels;
+    materials.forEach(material => {
+      materialLabels.push(material.name);
+      materialData.push(material.stock);
+      materialColors.push(this.colorCodes[material.name]);
     });
+
+    this.barChartData = [{ data: materialData, label: 'Stock Quantity', backgroundColor: materialColors }];
+    this.barChartLabels = materialLabels;
   }
+
 }
