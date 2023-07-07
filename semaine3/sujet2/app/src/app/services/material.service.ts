@@ -10,8 +10,8 @@ export class MaterialService {
 
   private baseUrl = 'http://localhost:3000/material';
 
-  private materialSubject = new BehaviorSubject<Material[]>([]);
-  public materials$ = this.materialSubject.asObservable();
+  private _material = new BehaviorSubject<Material[]>([]);
+  public materials$ = this._material.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -21,10 +21,10 @@ export class MaterialService {
 
   updateMaterials(): void {
     this.listMaterials().subscribe(materials => {
-      this.materialSubject.next(materials);
+      this._material.next(materials);
     });
   }
-  
+
   getMaterial(id: string) {
     return this.http.get(`${this.baseUrl}/${id}`);
   }
