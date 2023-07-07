@@ -1,29 +1,28 @@
-<div class="flex flex-col justify-center items-center h-screen">
+<div class="flex flex-col justify-center items-center h-screen space-y-2">
     <h2 class="text-center text-2xl font-semibold mb-6">Create Furniture</h2>
-    <form class="p-6 w-1/5 border space-y-4 border-customBrownColor" (ngSubmit)="onSubmit()">
+    <form class="p-4 w-auto border space-y-4 border-customBrownColor" (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label class="block font-medium mb-2" for="name">Name:</label>
             <input class="w-full border bg-customBeigeColor border-customBrownColor p-2" type="text" [(ngModel)]="name"
                 name="name" required>
         </div>
 
-        <div class="form-group">
-            <label class="block font-medium mb-2" for="category">Category:</label>
-            <select class="w-full font-medium border bg-customBeigeColor border-customBrownColor p-2"
-                [(ngModel)]="category" name="category" required>
-                <option class="font-medium" *ngFor="let option of categoryOptions" [value]="option">{{ option }}
-                </option>
-            </select>
+        <div class="form-group space-x-2 flex-1">
+            <label class="block font-medium mb-2">Category:</label>
+            <div *ngFor="let option of categoryOptions" class="space-x-2 inline-flex">
+                <input [(ngModel)]="category" type="radio" [value]="option" name="category" required>
+                <label class="font-medium">{{ option | capitalize }}</label>
+            </div>
         </div>
 
-        <div class="form-group">
-            <label class="block font-medium mb-2" for="materials">Materials:</label>
-            <select class="w-full border overflow-auto bg-customBeigeColor border-customBrownColor p-2"
-                [(ngModel)]="materials" name="materials" required multiple>
-                <option class="font-medium" *ngFor="let material of materialList" [value]="material._id">{{
-                    material.name }}</option>
-            </select>
+        <div class="form-group space-x-2 flex-1">
+            <label class="block font-medium mb-2">Materials:</label>
+            <div *ngFor="let material of materialList" class="space-x-2 inline-flex">
+                <input type="checkbox" [(ngModel)]="materials[material._id]" [value]="material._id" name="materials">
+                <label class="font-medium">{{ material.name | capitalize }}</label>
+            </div>
         </div>
+
         <div class="form-group text-center">
             <button
                 class="bg-customBrownColor text-white py-2 px-4 rounded-sm hover:text-customBrownColor mt-4 border-2 border-customBrownColor hover:bg-customBeigeColor"
@@ -32,4 +31,7 @@
             </button>
         </div>
     </form>
+    <div class="h-1/2 w-1/2">
+        <app-material-chart></app-material-chart>
+    </div>
 </div>

@@ -16,6 +16,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LayoutComponent } from './components/layout/layout.component';
 import { NgChartsModule } from 'ng2-charts';
 import { MaterialChartComponent } from './components/material-chart/material-chart.component';
+import { CapitalizePipe } from './pipes/capitalize.pipe'; 
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { MaterialChartComponent } from './components/material-chart/material-cha
     CreateFurnitureComponent,
     FurnitureListComponent,
     LayoutComponent,
-    MaterialChartComponent
+    MaterialChartComponent,
+    CapitalizePipe
   ],
   imports: [
     BrowserModule,
