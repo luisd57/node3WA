@@ -10,30 +10,26 @@ import { FurnitureService } from 'src/app/services/furniture.service';
 export class FurnitureListComponent implements OnInit {
 
   furnitureList: Furniture[] = [];
-  filteredList: Furniture[] = [];
+  filteredFurnitureList: Furniture[] = [];
   currentCategory: string = '';
 
   constructor(private furnitureService: FurnitureService) { }
 
   ngOnInit(): void {
-    this.furnitureService.listFurniture().subscribe({
-      next: (furnitureList: Furniture[]) => {
-        this.furnitureList = furnitureList;
-        this.filteredList = furnitureList;
-      },
-      error: (error) => {
-        console.error('Error fetching furniture list');
-        alert('Error fetching furniture list. Please try again.');
-      }
+    this.furnitureService.listFurniture();
+    this.furnitureService.furniture$.subscribe(furnitureList => {
+      this.furnitureList = furnitureList;
+      this.filteredFurnitureList = furnitureList;
     });
   }
+
   filterByCategory(category: string = ''): void {
     this.currentCategory = category;
     if (category) {
-        this.filteredList = this.furnitureList.filter(item => item.category === category);
+      this.filteredFurnitureList = this.furnitureList.filter(item => item.category === category);
     } else {
-        this.filteredList = this.furnitureList;
+      this.filteredFurnitureList = this.furnitureList;
     }
-}
+  }
 
 }

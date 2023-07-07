@@ -1,25 +1,61 @@
-<div class="mt-32 h-screen text-customBrownColor">
-    <button (click)="filterByCategory('shelf')">Shelf</button>
-    <button (click)="filterByCategory('wardrobe')">Wardrobe</button>
-    <button (click)="filterByCategory()">All</button>
+<!-- <div class="h-screen text-customBrownColor">
+    <div class="h-32 grid grid-cols-3 text-6xl">
+        <button class="bg-customLighBeigeColor hover:bg-customBeigeHoverColor" (click)="filterByCategory()">All</button>    
+        <button class="bg-customLighBeigeColor hover:bg-customBeigeHoverColor" (click)="filterByCategory('shelf')">Shelf</button>
+        <button class="bg-customLighBeigeColor hover:bg-customBeigeHoverColor" (click)="filterByCategory('wardrobe')">Wardrobe</button>
+    </div>
     <div class="h-1/2 grid grid-cols-3" style="grid-auto-rows: minmax(30rem, auto)">
-        <div *ngFor="let furniture of filteredList">
-            <div class="border-2 border-customLighBeigeColor p-6 h-full min-h-0 w-full flex space-x-12 items-end">
-                <p class="text-lg font-semibold overflow-y-auto">{{ furniture.name }}</p>
-                <p class="font-semibold overflow-y-auto">{{ furniture.category }}</p>
-                <div class="font-semibold flex-grow overflow-y-auto" *ngFor="let material of furniture.materials">
+        <ng-container *ngFor="let furniture of filteredFurnitureList">
+            <div class="border-2 border-customLighBeigeColor p-6 h-full min-h-0 w-full flex flex-col justify-end space-y-4 items-start">
+                <p class="text-lg font-semibold">{{ furniture.name }}</p>
+                <p class="font-semibold">{{ furniture.category }}</p>
+                <div class="font-semibold flex flex-wrap space-x-2" *ngFor="let material of furniture.materials">
                     <span class="cursor-pointer hover:text-customLighBeigeColor" [ngbTooltip]="tooltipContent"
                         placement="top"><fa-icon [icon]="['fas', 'circle']" [ngClass]="material.name"></fa-icon> {{
                         material.name }}</span>
                     <ng-template #tooltipContent>
                         <div class="shadow-lg p-2 bg-customBeigeColor">
-                            <div>Name: {{ material.name }}</div>
+                            <div>Material: {{ material.name }}</div>
                             <div>Company: {{ material.company.name }}</div>
                             <div>Stock: {{ material.stock }}</div>
                         </div>
                     </ng-template>
                 </div>
             </div>
-        </div>
+        </ng-container>
+    </div>
+</div> -->
+
+<div class="h-screen text-customBrownColor">
+    <div class="h-32 grid grid-cols-3 text-6xl">
+        <button class="bg-customLighBeigeColor" [ngClass]="{'active': currentCategory === ''}"
+            (click)="filterByCategory()">All</button>
+        <button class="bg-customLighBeigeColor" [ngClass]="{'active': currentCategory === 'shelf'}"
+            (click)="filterByCategory('shelf')">Shelf</button>
+        <button class="bg-customLighBeigeColor" [ngClass]="{'active': currentCategory === 'wardrobe'}"
+            (click)="filterByCategory('wardrobe')">Wardrobe</button>
+    </div>
+    <div class="h-1/2 grid grid-cols-3" style="grid-auto-rows: minmax(30rem, auto)">
+        <ng-container *ngFor="let furniture of filteredFurnitureList">
+            <div class="border-2 border-customLighBeigeColor p-4 h-full min-h-0 w-full grid grid-cols-[3fr,7fr]">
+                <div class="flex flex-col justify-end space-y-4 items-start">
+                    <p class="text-lg font-semibold">{{ furniture.name }}</p>
+                    <p class="font-semibold">{{ furniture.category }}</p>
+                    <div class="font-semibold flex flex-wrap space-x-2" *ngFor="let material of furniture.materials">
+                        <span class="cursor-pointer hover:text-customLighBeigeColor" [ngbTooltip]="tooltipContent"
+                            placement="top"><fa-icon [icon]="['fas', 'circle']" [ngClass]="material.name"></fa-icon> {{
+                            material.name }}</span>
+                        <ng-template #tooltipContent>
+                            <div class="shadow-lg p-2 bg-customBeigeColor">
+                                <div>Material: {{ material.name }}</div>
+                                <div>Company: {{ material.company.name }}</div>
+                                <div>Stock: {{ material.stock }}</div>
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+                <div class="bg-cover bg-center" style="background-image: url('/assets/testIMG.jpeg')"></div>
+            </div>
+        </ng-container>
     </div>
 </div>

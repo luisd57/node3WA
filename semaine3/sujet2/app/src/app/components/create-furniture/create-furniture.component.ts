@@ -34,9 +34,7 @@ export class CreateFurnitureComponent implements OnInit {
     this.furnitureService.createFurniture(this.name, this.category, this.materials).subscribe({
       next: () => {
         alert(`Furniture "${this.name}" created successfully.`);
-        this.name = '';
-        this.category = '';
-        this.materials = [];
+        this.furnitureService.updateFurnitureList();
       },
       error: (error) => {
         console.error('Creation of furniture failed.');
@@ -44,5 +42,5 @@ export class CreateFurnitureComponent implements OnInit {
       }
     });
   }
-  
+
 }

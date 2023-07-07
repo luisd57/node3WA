@@ -8,7 +8,8 @@ module.exports = {
       colors: {
         'customBeigeColor': '#f4f1e1',
         'customBrownColor': '#321e1e',
-        'customLighBeigeColor': '#bdb498'
+        'customLighBeigeColor': '#bdb498',
+        'customBeigeHoverColor': '#e3d8b6'
       },
     },
   },
