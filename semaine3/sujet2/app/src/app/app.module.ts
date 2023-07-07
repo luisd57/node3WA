@@ -12,8 +12,11 @@ import { AuthComponent } from './components/auth/auth.component';
 import { AuthFormComponent } from './components/auth-form/auth-form.component';
 import { CreateFurnitureComponent } from './components/create-furniture/create-furniture.component';
 import { FurnitureListComponent } from './components/furniture-list/furniture-list.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LayoutComponent } from './components/layout/layout.component';
+import { NgChartsModule } from 'ng2-charts';
+import { MaterialChartComponent } from './components/material-chart/material-chart.component';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +25,8 @@ import { LayoutComponent } from './components/layout/layout.component';
     AuthFormComponent,
     CreateFurnitureComponent,
     FurnitureListComponent,
-    LayoutComponent
+    LayoutComponent,
+    MaterialChartComponent
   ],
   imports: [
     BrowserModule,
@@ -30,8 +34,9 @@ import { LayoutComponent } from './components/layout/layout.component';
     HttpClientModule,
     FormsModule, ReactiveFormsModule,
     FontAwesomeModule,
-    NgbModule
-    
+    NgbModule,
+    NgChartsModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -40,4 +45,4 @@ export class AppModule {
   constructor(library: FaIconLibrary) {
     library.addIconPacks(fas, far);
   }
- }
+}
