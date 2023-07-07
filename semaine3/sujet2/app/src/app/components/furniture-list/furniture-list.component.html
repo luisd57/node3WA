@@ -39,17 +39,17 @@
         <ng-container *ngFor="let furniture of filteredFurnitureList">
             <div class="border-2 border-customLighBeigeColor p-4 h-full min-h-0 w-full grid grid-cols-[3fr,7fr]">
                 <div class="flex flex-col justify-end space-y-4 items-start">
-                    <p class="text-lg font-semibold">{{ furniture.name }}</p>
-                    <p class="font-semibold">{{ furniture.category }}</p>
+                    <p class="text-lg font-semibold">{{ furniture.name | capitalize }}</p>
+                    <p class="font-semibold">{{ furniture.category | capitalize }}</p>
                     <div class="font-semibold flex flex-wrap space-x-2" *ngFor="let material of furniture.materials">
                         <span class="cursor-pointer hover:text-customLighBeigeColor" [ngbTooltip]="tooltipContent"
                             placement="top"><fa-icon [icon]="['fas', 'circle']" [ngClass]="material.name"></fa-icon> {{
-                            material.name }}</span>
+                            material.name | capitalize }}</span>
                         <ng-template #tooltipContent>
                             <div class="shadow-lg p-2 bg-customBeigeColor">
-                                <div>Material: {{ material.name }}</div>
-                                <div>Company: {{ material.company.name }}</div>
-                                <div>Stock: {{ material.stock }}</div>
+                                <div>Material: {{ material.name | capitalize }}</div>
+                                <div>Company: {{ material.company.name | capitalize }}</div>
+                                <div>Stock: {{ material.stock | capitalize }}</div>
                             </div>
                         </ng-template>
                     </div>
